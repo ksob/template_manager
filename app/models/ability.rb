@@ -27,7 +27,7 @@ class Ability
     can :read, :all                   # allow everyone to read everything
     if user
       can :access, :rails_admin       # only allow admin users to access Rails Admin
-      if user.role? :superadmin
+      if user.role? :super_admin
         can :manage, :all             # allow superadmins to do anything
       elsif user.role? :manager
         can :manage, [User, FormTemplate]  # allow managers to do anything to products and users
