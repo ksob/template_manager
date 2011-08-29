@@ -24,5 +24,18 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    can :read, :all                   # allow everyone to read everything
+    if user
+      can :access, :rails_admin       # only allow admin users to access Rails Admin
+      if user.role? :superadmin
+        can :manage, :all             # allow superadmins to do anything
+      elsif user.role? :manager
+        can :manage, [User, FormTemplate]  # allow managers to do anything to products and users
+      elsif user.role? :stakeholder
+        can :update, FormTemplate, :hidden => false  # allow stakeholders to only update visible forms
+      elsif user.role? :requestor
+        # allow requestors to only fill forms
+      end
+    end
   end
 end
