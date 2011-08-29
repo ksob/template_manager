@@ -1,6 +1,10 @@
 TemplateManager::Application.routes.draw do
   devise_for :users
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
+  # https://github.com/sferik/rails_admin/issues/362
+  match ':controller(/:action(/:id(.:format)))'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
