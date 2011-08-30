@@ -5,6 +5,8 @@ TemplateManager::Application.routes.draw do
   # https://github.com/sferik/rails_admin/issues/362
   match ':controller(/:action(/:id(.:format)))'
   
+  root :to => FormTemplatesController.action(:index) 
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
