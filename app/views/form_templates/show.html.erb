@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @form_template.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= raw(@form_template.contents) %>
+</p>
+
+
+<%= link_to 'Back', form_templates_path %>

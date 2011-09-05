@@ -1,0 +1,21 @@
+<h1>Listing form_templates</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @form_templates.each do |form_template| %>
+  <tr>
+    <td><%= form_template.name %></td>
+    <td><%= form_template.description %></td>
+    <td><%= link_to 'Show', form_template %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
