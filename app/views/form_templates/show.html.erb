@@ -7,7 +7,15 @@
 
 <p>
   <b>Description:</b>
-  <%= raw(@form_template.contents) %>
+  <%= @form_template.description %>
+
+  <%= form_for([@form_template, @filled_form]) do |f| %>
+    <%= raw(@form_template.contents) %>
+  	<div class="actions">
+    	<%= f.submit %>
+  	</div>
+  <% end %>
+
 </p>
 
 

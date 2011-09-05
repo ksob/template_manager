@@ -14,6 +14,7 @@ class FormTemplatesController < ApplicationController
   # GET /form_templates/1.json
   def show
     @form_template = FormTemplate.find(params[:id])
+    @filled_form = FilledForm.new(:form_template=>@form_template)
 
     respond_to do |format|
       format.html # show.html.erb

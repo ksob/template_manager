@@ -1,7 +1,8 @@
 TemplateManager::Application.routes.draw do
-  resources :filled_forms
 
-  resources :form_templates, :only => [:index, :show]
+  resources :form_templates, :only => [:index, :show] do
+    resources :filled_forms
+  end
 
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
