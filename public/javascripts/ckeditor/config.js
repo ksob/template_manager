@@ -36,7 +36,7 @@ CKEDITOR.editorConfig = function( config )
   config.extraPlugins = "embed,attachment";
   
   /* Toolbars */
-  config.toolbar = 'Easy';
+  config.toolbar = 'Full';
   
   config.toolbar_Easy =
     [
