@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Contents:</b>
+  <%= @filled_form.contents %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @filled_form.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_filled_form_path(@filled_form) %> |
+<%= link_to 'Back', filled_forms_path %>

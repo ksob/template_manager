@@ -1,4 +1,6 @@
 TemplateManager::Application.routes.draw do
+  resources :filled_forms
+
   resources :form_templates, :only => [:index, :show]
 
   devise_for :users
