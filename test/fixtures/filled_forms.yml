@@ -3,7 +3,9 @@
 one:
   contents: MyText
   notes: MyText
+  form_template:
 
 two:
   contents: MyText
   notes: MyText
+  form_template:
