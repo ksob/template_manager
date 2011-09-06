@@ -15,11 +15,6 @@ GIT
       haml (>= 3.1.0, < 3.3.0)
       rails (~> 3.1.0.rc6)
 
-GIT
-  remote: https://github.com/nicksieger/activerecord-jdbc-adapter.git
-  revision: 79af9c08c7ce7e77fb417b29a14985a1a0bf3b61
-  specs:
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -162,16 +157,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbc-adapter!
-  activerecord-jdbcsqlite3-adapter (~> 1.1)
   cancan
   carrierwave
   ckeditor!
   coffee-rails (~> 3.1.0.rc)
   devise (~> 1.4.2)
-  jdbc-sqlite3 (~> 3.6)
   jquery-rails
-  jruby-openssl (~> 0.7)
   mini_magick
   mlb (~> 0.5.5)
   paperclip (~> 2.3.16)

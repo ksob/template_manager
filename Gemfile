@@ -31,23 +31,6 @@ group :development, :test do
   # Pretty printed test output
   gem 'turn', :require => false
 
-  platforms :jruby do
-    gem 'jruby-openssl', '~> 0.7'
-    # activerecord-jdbc-adapter does not yet have a rails 3.1 compatible release
-    gem 'activerecord-jdbc-adapter', :git => 'https://github.com/nicksieger/activerecord-jdbc-adapter.git'
-    case ENV['CI_DB_ADAPTER']
-    when 'mysql'
-      gem 'activerecord-jdbcmysql-adapter', '~> 1.1'
-      gem 'jdbc-mysql', '~> 5.1'
-    when 'postgresql'
-      gem 'activerecord-jdbcpostgresql-adapter', '~> 1.1'
-      gem 'jdbc-postgres', '~> 9.0'
-    else
-      gem 'activerecord-jdbcsqlite3-adapter', '~> 1.1'
-      gem 'jdbc-sqlite3', '~> 3.6'
-    end
-  end
-
   platforms :ruby, :mswin, :mingw do
     case ENV['CI_DB_ADAPTER']
     when 'mysql'
