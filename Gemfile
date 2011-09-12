@@ -2,6 +2,10 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.1.0'
 
+gem "bson_ext", "~> 1.3"
+gem "carrierwave"
+gem "mini_magick"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -11,7 +15,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem "mongoid", "~> 2.2"
 
 gem "cancan"
 gem 'devise', '~> 1.4.5'
@@ -21,9 +25,6 @@ gem 'paperclip', '~> 2.3.16'
 
 # if you need carrierwave you should use this line for now
 gem "ckeditor", :git => "git://github.com/galetahub/ckeditor.git"
-
-gem "carrierwave"
-gem "mini_magick"
 
 
 group :development, :test do
