@@ -9,14 +9,13 @@
   <b>Description:</b>
   <%= @form_template.description %>
 
-  <%= form_for([@form_template, @filled_form]) do |f| %>
+  <%= form_for([@form_template, @filled_form], :remote => true) do |f| %>
     <%= raw(@form_template.contents) %>
   	<div class="actions">
-    	<%= f.submit %>
+      <%= f.submit %>
   	</div>
   <% end %>
 
 </p>
-
 
 <%= link_to 'Back', form_templates_path %>
