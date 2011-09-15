@@ -40,11 +40,11 @@ class FilledFormsController < ApplicationController
   # POST /filled_forms
   # POST /filled_forms.json
   def create
-    @filled_form = FilledForm.new(params[:filled_form])
+    @form_template = FormTemplate.find(params[:form_template_id])
+    @filled_form = @form_template.filled_forms.create(params[:filled_form])
 
     respond_to do |format|
       if @filled_form.save
-        # format.html { redirect_to @filled_form, notice: 'Filled form was successfully created.' }
         format.html { redirect_to :back, notice: 'Filled form was successfully created.' }
         format.json { render json: @filled_form, status: :created, location: @filled_form }
       else
