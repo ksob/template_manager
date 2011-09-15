@@ -1,0 +1,23 @@
+<div class="cart_title">Your Cart</div>
+<table>
+
+  <% @user_filled_forms.each do |filled_form_grp| %>
+      <tr>
+        <td><%= filled_form_grp[:form_template][:name] %></td>
+      </tr>
+      <% filled_form_grp[:filled_forms].each do |filled_form| %>
+          <tr>
+            <td><%= filled_form['updated_at'] %></td>
+            <td><%= link_to 'Show', form_template_filled_form_path(filled_form_grp[:form_template][:id], filled_form['id'].to_s) %></td>
+          </tr>
+      <% end %>
+
+  <% end %>
+
+
+  <tr class="total_line">
+    <td colspan="2">Total</td>
+
+  </tr>
+
+</table>
