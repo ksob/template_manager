@@ -41,5 +41,10 @@ module TemplateManager
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # Re-enable active_record generator after overriding it by mongoid installer (probably)
+    config.generators do |g|
+      g.orm :active_record
+    end
   end
 end
