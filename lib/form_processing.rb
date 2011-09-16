@@ -50,7 +50,7 @@ module FormProcessing
       end
     end
 
-    NokogiriIO.extract_body_internals(doc)
+    NokogiriIO.extract_body_internals(doc).to_s
   end
 
   def raw_form_to_ror_form html
@@ -76,7 +76,7 @@ module FormProcessing
     </div>
     EOF
 
-    NokogiriIO.extract_body_internals(doc) + notes_textarea
+    NokogiriIO.extract_body_internals(doc).to_s + notes_textarea
   end
 
 end

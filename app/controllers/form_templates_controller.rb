@@ -19,7 +19,7 @@ class FormTemplatesController < ApplicationController
   def show
     @form_template = FormTemplate.find(params[:id])
 
-    if @form_template.ror_contents
+    if not @form_template.ror_contents
       @form_template.ror_contents = raw_form_to_ror_form(@form_template.contents)
       @form_template.save
       # TODO: refresh ror_contents when the contents changes meaning the form changed
