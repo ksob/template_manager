@@ -103,6 +103,7 @@ GEM
       tzinfo (~> 0.3.22)
     multi_json (1.0.3)
     multipart-post (1.1.3)
+    nokogiri (1.5.0)
     orm_adapter (0.0.5)
     paperclip (2.3.16)
       activerecord (>= 2.3.0)
@@ -175,6 +176,7 @@ DEPENDENCIES
   mini_magick
   mlb (~> 0.5.5)
   mongoid (~> 2.2)
+  nokogiri
   paperclip (~> 2.3.16)
   rails (~> 3.1.0)
   rails_admin!

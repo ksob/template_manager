@@ -26,6 +26,7 @@ gem 'paperclip', '~> 2.3.16'
 # if you need carrierwave you should use this line for now
 gem "ckeditor", :git => "git://github.com/galetahub/ckeditor.git"
 
+gem 'nokogiri'
 
 group :development, :test do
   # Pretty printed test output

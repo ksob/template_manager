@@ -10,7 +10,7 @@
   <%= @form_template.description %>
 
   <%= form_for([@form_template, @filled_form], :remote => true) do |f| %>
-    <%= raw(@form_template.contents) %>
+    <%= raw(@form_template.ror_contents) %>
   	<div class="actions">
       <%= f.submit %>
   	</div>
@@ -19,3 +19,5 @@
 </p>
 
 <%= link_to 'Back', form_templates_path %>
+<br />
+<br />

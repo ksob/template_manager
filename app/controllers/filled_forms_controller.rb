@@ -1,4 +1,6 @@
 class FilledFormsController < ApplicationController
+  include FormProcessing
+
   # GET /filled_forms
   # GET /filled_forms.json
   def index
@@ -16,6 +18,9 @@ class FilledFormsController < ApplicationController
   # GET /filled_forms/1.json
   def show
     @filled_form = FilledForm.find(params[:id])
+    @form_template = FormTemplate.find(params[:form_template_id])
+
+    @prefilled_ror_contents = prefill_ror_form @form_template.ror_contents, @filled_form.attributes
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,6 +42,9 @@ class FilledFormsController < ApplicationController
   # GET /filled_forms/1/edit
   def edit
     @filled_form = FilledForm.find(params[:id])
+    @form_template = FormTemplate.find(params[:form_template_id])
+
+    @prefilled_ror_contents = prefill_ror_form @form_template.ror_contents, @filled_form.attributes
   end
 
   # POST /filled_forms
@@ -63,10 +71,11 @@ class FilledFormsController < ApplicationController
   # PUT /filled_forms/1.json
   def update
     @filled_form = FilledForm.find(params[:id])
+    @form_template = FormTemplate.find(params[:form_template_id])
 
     respond_to do |format|
       if @filled_form.update_attributes(params[:filled_form])
-        format.html { redirect_to @filled_form, notice: 'Filled form was successfully updated.' }
+        format.html { redirect_to form_template_filled_form_path(params[:form_template_id], params[:id]), notice: 'Filled form was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
