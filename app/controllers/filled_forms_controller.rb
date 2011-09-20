@@ -6,8 +6,6 @@ class FilledFormsController < ApplicationController
   def index
     @filled_forms = FilledForm.all
 
-    @user_filled_forms = FormTemplate.get_user_filled_forms
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @filled_forms }
@@ -52,8 +50,6 @@ class FilledFormsController < ApplicationController
   def create
     @form_template = FormTemplate.find(params[:form_template_id])
     @filled_form = @form_template.filled_forms.create(params[:filled_form])
-
-    @user_filled_forms = FormTemplate.get_user_filled_forms
 
     respond_to do |format|
       if @filled_form.save

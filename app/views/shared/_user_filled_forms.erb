@@ -1,7 +1,7 @@
-<% if @user_filled_forms %>
+<% if self.user_filled_forms %>
 <div class="cart_title">Your Filled Forms</div>
 <table>
-  <% @user_filled_forms.each do |filled_form_grp| %>
+  <% self.user_filled_forms.each do |filled_form_grp| %>
       <tr>
         <td><%= filled_form_grp[:form_template][:name] %></td>
       </tr>
