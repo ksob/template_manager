@@ -6,21 +6,22 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id="user_interface">
 
-<div id="columns">
-  <div id="side">
-    <div id="user_filled_forms">
-      <%= render :partial => "shared/user_filled_forms" %>
+    <div id="columns">
+      <div id="side">
+        <a href="http://www....">Home</a><br/>
+        <a href="http://www..../contact">Contact</a><br/>
+        <a href="http://www..../contact">Admin Area</a><br/>
+        <br/><br/>
+        <div id="user_filled_forms">
+          <%= render :partial => "shared/user_filled_forms" %>
+        </div>
+      </div>
+      <div id="main">
+        <%= yield %>
+      </div>
     </div>
-    <a href="http://www....">Home</a><br/>
-    <a href="http://www..../contact">Contact</a><br/>
-    <a href="http://www..../contact">Admin Area</a><br/>
-  </div>
-  <div id="main">
-    <%= yield %>
-  </div>
-</div>
 
 </body>
 </html>
