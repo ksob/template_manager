@@ -1,0 +1,38 @@
+#columns {
+  }
+
+#side {
+  float: left;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  width: 21em;
+  background: #169;
+  a {
+    color: #bfb;
+    font-size: small; }}
+
+/* START:user_filled_forms_side */
+/* Styles for the user_filled_forms in the sidebar */
+#user_filled_forms {
+  float: left;
+  .user_filled_forms_title {
+    font-size: 180%;
+    font-family: sans-serif; }}
+
+#user_filled_forms, #user_filled_forms table {
+  font-size: smaller;
+  color:     white; }
+
+#user_filled_forms {
+  table {
+    border-top:    1px dotted #595;
+    border-bottom: 1px dotted #595;
+    margin-bottom: 10px; } }
+/* END:user_filled_forms_side */
+
+#main {
+  margin-left: 17em;
+  padding-top: 4ex;
+  padding-left: 6em;
+  background: white; }
