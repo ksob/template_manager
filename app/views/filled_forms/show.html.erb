@@ -3,6 +3,8 @@
 <%= raw(@prefilled_ror_contents) %>
 
 <%= link_to 'Edit', edit_form_template_filled_form_path(@form_template, @filled_form) %> |
+<%= link_to 'Destroy', form_template_filled_form_path(@form_template, @filled_form),
+            confirm: 'Are you sure?', method: :delete %> |
 <%= link_to 'Back', form_templates_path %>
 <br />
 <br />
