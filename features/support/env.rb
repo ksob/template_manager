@@ -31,20 +31,11 @@ Capybara.default_selector = :css
 ActionController::Base.allow_rescue = false
 
 
-Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
+Before('@sql-only', '~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
   # Remove/comment out the lines below if your app doesn't have a database.
   # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
   begin
     DatabaseCleaner.strategy = :transaction
-  rescue NameError
-    raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-  end
-end
-
-Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-  begin
-    DatabaseCleaner.orm = 'mongoid'
-    DatabaseCleaner.strategy = :truncation
   rescue NameError
     raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
   end

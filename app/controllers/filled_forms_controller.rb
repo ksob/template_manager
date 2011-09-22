@@ -16,7 +16,7 @@ class FilledFormsController < ApplicationController
   # GET /filled_forms/1.json
   def show
     @filled_form = FilledForm.find(params[:id])
-    @form_template = FormTemplate.find(params[:form_template_id])
+    @form_template = FormTemplate.find(@filled_form.form_template_id)
 
     @prefilled_ror_contents = prefill_ror_form @form_template.ror_contents, @filled_form.attributes
 
@@ -40,7 +40,7 @@ class FilledFormsController < ApplicationController
   # GET /filled_forms/1/edit
   def edit
     @filled_form = FilledForm.find(params[:id])
-    @form_template = FormTemplate.find(params[:form_template_id])
+    @form_template = FormTemplate.find(@filled_form.form_template_id)
 
     @prefilled_ror_contents = prefill_ror_form @form_template.ror_contents, @filled_form.attributes
   end
@@ -54,7 +54,7 @@ class FilledFormsController < ApplicationController
     respond_to do |format|
       if @filled_form.save
         format.html { redirect_to :back, notice: 'Filled form was successfully created.' }
-        format.js
+        format.js { @current_form_template = @form_template; @current_filled_form = @filled_form }
         format.json { render json: @filled_form, status: :created, location: @filled_form }
       else
         format.html { render action: "new" }
@@ -67,11 +67,11 @@ class FilledFormsController < ApplicationController
   # PUT /filled_forms/1.json
   def update
     @filled_form = FilledForm.find(params[:id])
-    @form_template = FormTemplate.find(params[:form_template_id])
+    @form_template = FormTemplate.find(@filled_form.form_template_id)
 
     respond_to do |format|
       if @filled_form.update_attributes(params[:filled_form])
-        format.html { redirect_to form_template_filled_form_path(params[:form_template_id], params[:id]), notice: 'Filled form was successfully updated.' }
+        format.html { redirect_to form_template_filled_form_path(@filled_form.form_template_id, params[:id]), notice: 'Filled form was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -87,7 +87,7 @@ class FilledFormsController < ApplicationController
     @filled_form.destroy
 
     respond_to do |format|
-      format.html { redirect_to filled_forms_url }
+      format.html { redirect_to form_templates_path }
       format.json { head :ok }
     end
   end
