@@ -1,16 +1,4 @@
 <% if self.user_filled_forms %>
-<div class="cart_title">Your Filled Forms</div>
-<table>
-  <% self.user_filled_forms.each do |filled_form_grp| %>
-      <tr>
-        <td><%= filled_form_grp[:form_template][:name] %></td>
-      </tr>
-      <% filled_form_grp[:filled_forms].each do |filled_form| %>
-          <tr>
-            <td><%= filled_form['updated_at'] %></td>
-            <td><%= link_to 'Show', form_template_filled_form_path(filled_form_grp[:form_template][:id], filled_form['id'].to_s) %></td>
-          </tr>
-      <% end %>
-  <% end %>
-</table>
+<div class="user_filled_forms_title">Your Filled Forms</div>
+<%= render_navigation :items => self.menu %>
 <% end %>

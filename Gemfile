@@ -27,6 +27,7 @@ gem 'paperclip', '~> 2.3.16'
 gem "ckeditor", :git => "git://github.com/galetahub/ckeditor.git"
 
 gem 'nokogiri'
+gem "simple-navigation"
 
 group :development do
   gem "autotest"
