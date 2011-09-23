@@ -78,3 +78,6 @@ group :cucumber do
   gem "pickle", ">=0.4.2"
 end
 
+group :production do
+  gem 'pg', '~> 0.10'
+end
