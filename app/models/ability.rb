@@ -24,7 +24,7 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    can :read, :all                   # allow everyone to read everything
+    can :manage, :all                   # allow everyone to read everything
     if user
       can :access, :rails_admin       # only allow admin users to access Rails Admin
       if user.role? :super_admin
