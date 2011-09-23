@@ -193,6 +193,7 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
+    pg (0.11.0)
     pickle (0.4.8)
       cucumber (>= 0.8)
       rake
@@ -356,6 +357,7 @@ DEPENDENCIES
   mongoid-rspec
   nokogiri
   paperclip (~> 2.3.16)
+  pg (~> 0.10)
   pickle (>= 0.4.2)
   rails (~> 3.1.0)
   rails_admin!
