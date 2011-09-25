@@ -52,9 +52,12 @@ group :development do
       gem 'win32console'
       gem 'rb-notifu'
   end
+  gem "guard-bundler", ">= 0.1.3"
+  gem "guard-rails", ">= 0.0.3"
+  gem "guard-livereload", ">= 0.3.0"
   gem 'guard-spork'
-  gem 'guard-rspec'
-  gem 'guard-cucumber'
+  gem 'guard-rspec', ">= 0.4.3"
+  gem 'guard-cucumber', ">= 0.6.1"
 end
 
 group :development, :test do
