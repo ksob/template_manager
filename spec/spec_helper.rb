@@ -2,66 +2,64 @@ require 'rubygems'
 require 'spork'
 
 Spork.prefork do
-  # Loading more in this block will cause your tests to run faster. However, 
-  # if you change any configuration or code from libraries loaded here, you'll
-  # need to restart spork for it take effect.
+  ENV["RAILS_ENV"] ||= "test"
 
-  # This file is copied to spec/ when you run 'rails generate rspec:install'
-  ENV["RAILS_ENV"] ||= 'test'
+  require "rails/mongoid"
+  Spork.trap_class_method(Rails::Mongoid, :load_models)
+
+  # The following does not work correclty. 
+  # Results in NameError unintitialized *
+  # :reload_routes! triggers :devise_for which loads and caches the User class.
+  # https://github.com/timcharper/spork/wiki/Spork.trap_method-Jujutsu
+  # require "rails/application"
+  # Spork.trap_method(Rails::Application, :reload_routes!)
+
   require File.expand_path("../../config/environment", __FILE__)
+
   require 'rspec/rails'
-
-# Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
-  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
+  require 'devise/test_helpers'
+  require 'database_cleaner'
+  
   RSpec.configure do |config|
-    # == Mock Framework
-    #
-    # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-    #
-    # config.mock_with :mocha
-    # config.mock_with :flexmock
-    # config.mock_with :rr
     config.mock_with :rspec
+    
+    config.include Devise::TestHelpers, :type => :controller
 
-    if RSpec.configuration.inclusion_filter[:notxn]
-      # Clean up the database
-      require 'database_cleaner'
-      config.before(:suite) do
-        DatabaseCleaner.strategy = :truncation
-        DatabaseCleaner.orm = "mongoid"
-      end
-      config.before(:each) do
-        DatabaseCleaner.clean
-      end
-    else
-      # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-      config.fixture_path = "#{::Rails.root}/spec/fixtures"
+    config.before(:suite) do
+      # This is only ran once per run
+      DatabaseCleaner[:active_record].clean_with :truncation 
+	  
+	  # :transaction for active_record does not work
+	  # it is crashing with "SQLite3::SQLException: cannot start a transaction within a transaction"
+	  # when running over Spork
+	  # so using :truncation as well
+	  # details: https://github.com/cucumber/cucumber-rails/pull/130
+	  # TODO: make to work with :transaction
+      DatabaseCleaner[:active_record].strategy = :truncation 
+	  
+	  DatabaseCleaner[:mongoid].strategy = :truncation
+    end
 
-      # If you're not using ActiveRecord, or you'd prefer not to run each of your
-      # examples within a transaction, remove the following line or assign false
-      # instead of true.
-      config.use_transactional_fixtures = true
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
     end
   end
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
+  
+  # Devise caches the user class so we need to reload it
+  load File.expand_path(File.dirname(__FILE__) + '/../app/models/user.rb')
+  
+  # uncomment if you want changes to factories to take effect on each run:
+  # FactoryGirl.reload
+  
+  # Requires supporting ruby files with custom matchers and macros, etc,
+  # in spec/support/ and its subdirectories.
+  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 end
-
-# --- Instructions ---
-# - Sort through your spec_helper file. Place as much environment loading 
-#   code that you don't normally modify during development in the 
-#   Spork.prefork block.
-# - Place the rest under Spork.each_run block
-# - Any code that is left outside of the blocks will be ran during preforking
-#   and during each_run!
-# - These instructions should self-destruct in 10 seconds.  If they don't,
-#   feel free to delete them.
-#
-
-
-
