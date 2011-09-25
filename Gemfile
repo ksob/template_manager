@@ -1,3 +1,6 @@
+require 'rbconfig'
+HOST_OS = Config::CONFIG['host_os']
+
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.1.0'
@@ -15,6 +18,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+if HOST_OS =~ /linux/i
+  gem 'therubyracer', '>= 0.8.2'
+end
+
 gem "mongoid", "~> 2.2"
 
 gem "cancan"
@@ -30,9 +38,23 @@ gem 'nokogiri'
 gem "simple-navigation"
 
 group :development do
-  gem "autotest"
-  gem "autotest-notification"
   gem "metric_fu", ">=1.5.1"
+  gem "guard", ">= 0.6.2"
+  case HOST_OS
+    when /darwin/i
+      gem 'rb-fsevent'
+      gem 'growl'
+    when /linux/i
+      gem 'libnotify'
+      gem 'rb-inotify'
+    when /mswin|windows/i
+      gem 'rb-fchange'
+      gem 'win32console'
+      gem 'rb-notifu'
+  end
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
 end
 
 group :development, :test do
@@ -58,11 +80,6 @@ group :development, :test do
   platforms :mri_19 do
     gem "ruby-debug19", :require => 'ruby-debug'
   end
-  gem 'rb-fsevent'#, :require => false if RUBY_PLATFORM =~ /darwin/i
-  gem 'growl'
-  gem 'guard-spork'
-  gem 'guard-rspec'
-  gem 'guard-cucumber'
 end
 
 group :test do
@@ -72,6 +89,7 @@ group :test do
   gem "remarkable_activerecord", ">=4.0.0.alpha4"
   gem "remarkable_mongoid", "~> 0.6.0"
   gem "mongoid-rspec"
+  gem "launchy", ">= 2.0.5"
 end
 
 group :cucumber do
