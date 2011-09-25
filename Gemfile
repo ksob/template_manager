@@ -58,6 +58,11 @@ group :development, :test do
   platforms :mri_19 do
     gem "ruby-debug19", :require => 'ruby-debug'
   end
+  gem 'rb-fsevent'#, :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'growl'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
 end
 
 group :test do
