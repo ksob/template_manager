@@ -99,9 +99,12 @@ group :cucumber do
   gem "cucumber", ">=0.6.3"
   gem "cucumber-rails", ">=0.3.2"
   gem "capybara", ">=0.3.6"
-  gem "database_cleaner", ">=0.5.0"
-  gem "spork", ">=0.8.4"
   gem "pickle", ">=0.4.2"
+end
+
+group :development, :test do
+  gem "database_cleaner", ">=0.6.6"
+  gem "spork", ">=0.8.4"
 end
 
 group :production do
