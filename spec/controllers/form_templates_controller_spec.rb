@@ -27,145 +27,151 @@ describe FormTemplatesController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all form_templates as @form_templates" do
-      form_template = FormTemplate.create! valid_attributes
-      get :index
-      assigns(:form_templates).should eq([form_template])
-    end
+  before(:each) do
+    request.env["HTTP_REFERER"] = '/form_templates'
   end
 
-  describe "GET show" do
-    it "assigns the requested form_template as @form_template" do
-      form_template = FormTemplate.create! valid_attributes
-      get :show, :id => form_template.id.to_s
-      assigns(:form_template).should eq(form_template)
-    end
-  end
+  context "logged-in user" do
 
-  describe "GET new" do
-    it "assigns a new form_template as @form_template" do
-      pending("this CRUD actions is not available yet")
-      get :new
-      assigns(:form_template).should be_a_new(FormTemplate)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested form_template as @form_template" do
-      pending("this CRUD actions is not available yet")
-      form_template = FormTemplate.create! valid_attributes
-      get :edit, :id => form_template.id.to_s
-      assigns(:form_template).should eq(form_template)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new FormTemplate" do
-        pending("this CRUD actions is not available yet")
-        expect {
-          post :create, :form_template => valid_attributes
-        }.to change(FormTemplate, :count).by(1)
+    describe "GET index" do
+      it "assigns all form_templates as @form_templates" do
+        form_template = FactoryGirl.create(:form_template)
+        get :index
+        assigns(:form_templates).should eq([form_template])
       end
-
-      it "assigns a newly created form_template as @form_template" do
-        pending("this CRUD actions is not available yet")
-        post :create, :form_template => valid_attributes
-        assigns(:form_template).should be_a(FormTemplate)
-        assigns(:form_template).should be_persisted
-      end
-
-      it "redirects to the created form_template" do
-        pending("this CRUD actions is not available yet")
-        post :create, :form_template => valid_attributes
-        response.should redirect_to(FormTemplate.last)
+    end
+    describe "GET show" do
+      it "assigns the requested form_template as @form_template" do
+        form_template = FactoryGirl.create(:form_template)
+        get :show, :id => form_template.id.to_s
+        assigns(:form_template).should eq(form_template)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved form_template as @form_template" do
+    describe "GET new" do
+      it "assigns a new form_template as @form_template" do
         pending("this CRUD actions is not available yet")
-        # Trigger the behavior that occurs when invalid params are submitted
-        FormTemplate.any_instance.stub(:save).and_return(false)
-        post :create, :form_template => {}
+        get :new
         assigns(:form_template).should be_a_new(FormTemplate)
       end
-
-      it "re-renders the 'new' template" do
-        pending("this CRUD actions is not available yet")
-        # Trigger the behavior that occurs when invalid params are submitted
-        FormTemplate.any_instance.stub(:save).and_return(false)
-        post :create, :form_template => {}
-        response.should render_template("new")
-      end
     end
-  end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested form_template" do
-        pending("this CRUD actions is not available yet")
-        form_template = FormTemplate.create! valid_attributes
-        # Assuming there are no other form_templates in the database, this
-        # specifies that the FormTemplate created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        FormTemplate.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => form_template.id, :form_template => {'these' => 'params'}
-      end
-
+    describe "GET edit" do
       it "assigns the requested form_template as @form_template" do
         pending("this CRUD actions is not available yet")
         form_template = FormTemplate.create! valid_attributes
-        put :update, :id => form_template.id, :form_template => valid_attributes
+        get :edit, :id => form_template.id.to_s
         assigns(:form_template).should eq(form_template)
-      end
-
-      it "redirects to the form_template" do
-        pending("this CRUD actions is not available yet")
-        form_template = FormTemplate.create! valid_attributes
-        put :update, :id => form_template.id, :form_template => valid_attributes
-        response.should redirect_to(form_template)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the form_template as @form_template" do
-        pending("this CRUD actions is not available yet")
-        form_template = FormTemplate.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        FormTemplate.any_instance.stub(:save).and_return(false)
-        put :update, :id => form_template.id.to_s, :form_template => {}
-        assigns(:form_template).should eq(form_template)
+    describe "POST create" do
+      describe "with valid params" do
+        it "creates a new FormTemplate" do
+          pending("this CRUD actions is not available yet")
+          expect {
+            post :create, :form_template => valid_attributes
+          }.to change(FormTemplate, :count).by(1)
+        end
+
+        it "assigns a newly created form_template as @form_template" do
+          pending("this CRUD actions is not available yet")
+          post :create, :form_template => valid_attributes
+          assigns(:form_template).should be_a(FormTemplate)
+          assigns(:form_template).should be_persisted
+        end
+
+        it "redirects to the created form_template" do
+          pending("this CRUD actions is not available yet")
+          post :create, :form_template => valid_attributes
+          response.should redirect_to(FormTemplate.last)
+        end
       end
 
-      it "re-renders the 'edit' template" do
-        pending("this CRUD actions is not available yet")
-        form_template = FormTemplate.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        FormTemplate.any_instance.stub(:save).and_return(false)
-        put :update, :id => form_template.id.to_s, :form_template => {}
-        response.should render_template("edit")
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved form_template as @form_template" do
+          pending("this CRUD actions is not available yet")
+          # Trigger the behavior that occurs when invalid params are submitted
+          FormTemplate.any_instance.stub(:save).and_return(false)
+          post :create, :form_template => {}
+          assigns(:form_template).should be_a_new(FormTemplate)
+        end
+
+        it "re-renders the 'new' template" do
+          pending("this CRUD actions is not available yet")
+          # Trigger the behavior that occurs when invalid params are submitted
+          FormTemplate.any_instance.stub(:save).and_return(false)
+          post :create, :form_template => {}
+          response.should render_template("new")
+        end
       end
     end
-  end
 
-  describe "DELETE destroy" do
-    it "destroys the requested form_template" do
-      pending("this CRUD actions is not available yet")
-      form_template = FormTemplate.create! valid_attributes
-      expect {
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested form_template" do
+          pending("this CRUD actions is not available yet")
+          form_template = FormTemplate.create! valid_attributes
+          # Assuming there are no other form_templates in the database, this
+          # specifies that the FormTemplate created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          FormTemplate.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, :id => form_template.id, :form_template => {'these' => 'params'}
+        end
+
+        it "assigns the requested form_template as @form_template" do
+          pending("this CRUD actions is not available yet")
+          form_template = FormTemplate.create! valid_attributes
+          put :update, :id => form_template.id, :form_template => valid_attributes
+          assigns(:form_template).should eq(form_template)
+        end
+
+        it "redirects to the form_template" do
+          pending("this CRUD actions is not available yet")
+          form_template = FormTemplate.create! valid_attributes
+          put :update, :id => form_template.id, :form_template => valid_attributes
+          response.should redirect_to(form_template)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the form_template as @form_template" do
+          pending("this CRUD actions is not available yet")
+          form_template = FormTemplate.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          FormTemplate.any_instance.stub(:save).and_return(false)
+          put :update, :id => form_template.id.to_s, :form_template => {}
+          assigns(:form_template).should eq(form_template)
+        end
+
+        it "re-renders the 'edit' template" do
+          pending("this CRUD actions is not available yet")
+          form_template = FormTemplate.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          FormTemplate.any_instance.stub(:save).and_return(false)
+          put :update, :id => form_template.id.to_s, :form_template => {}
+          response.should render_template("edit")
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "destroys the requested form_template" do
+        pending("this CRUD actions is not available yet")
+        form_template = FormTemplate.create! valid_attributes
+        expect {
+          delete :destroy, :id => form_template.id.to_s
+        }.to change(FormTemplate, :count).by(-1)
+      end
+
+      it "redirects to the form_templates list" do
+        pending("this CRUD actions is not available yet")
+        form_template = FormTemplate.create! valid_attributes
         delete :destroy, :id => form_template.id.to_s
-      }.to change(FormTemplate, :count).by(-1)
+        response.should redirect_to(form_templates_url)
+      end
     end
 
-    it "redirects to the form_templates list" do
-      pending("this CRUD actions is not available yet")
-      form_template = FormTemplate.create! valid_attributes
-      delete :destroy, :id => form_template.id.to_s
-      response.should redirect_to(form_templates_url)
-    end
   end
-
 end

@@ -8,6 +8,7 @@ Feature: lists available form templates
   Scenario: None form template available
     Given the following form template exists:
       | Name | Description |
+    And I am logged in as standard user
     When I am on the home page
     Then I should not see "Show"
     # "Show" button accompanies every form template
@@ -16,6 +17,7 @@ Feature: lists available form templates
     Given the following form template exists:
       | Name         | Description          |
       | SomeTemplate | This is SomeTemplate |
+    And I am logged in as standard user
     When I am on the home page
     Then I should see "SomeTemplate"
 
@@ -24,6 +26,7 @@ Feature: lists available form templates
       | Name              | Description               |
       | SomeTemplate      | This is SomeTemplate      |
       | SomeOtherTemplate | This is SomeOtherTemplate |
+    And I am logged in as standard user
     When I am on the home page
     Then I should see "SomeTemplate"
     And I should see "SomeOtherTemplate"

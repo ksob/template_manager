@@ -32,136 +32,146 @@ describe FilledFormsController do
     @filled_form = FactoryGirl.create(:filled_form)
   end
 
-  describe "GET index" do
-    it "assigns all filled_forms as @filled_forms" do
-      pending "this CRUD is not needed yet"
-      get :index
-      assigns(:filled_forms).should eq([@filled_form])
+  context "logged-in user" do
+    before do
+      user = RailsAdmin::AbstractModel.new("User").create(
+          :email => "username@example.com",
+          :password => "password"
+      )
+      login_as user
     end
-  end
 
-  describe "GET show" do
-    it "assigns the requested filled_form as @filled_form" do
-      get :show, :id => @filled_form.id.to_s
-      assigns(:filled_form).should eq(@filled_form)
-      assigns(:form_template).ror_contents.should eq(FactoryGirl.create(:form_template).ror_contents)
-      prefilled_ror_contents = <<-EOF
+    describe "GET index" do
+      it "assigns all filled_forms as @filled_forms" do
+        pending "this CRUD is not needed yet"
+        get :index
+        assigns(:filled_forms).should eq([@filled_form])
+      end
+    end
+
+    describe "GET show" do
+      it "assigns the requested filled_form as @filled_form" do
+        get :show, :id => @filled_form.id.to_s
+        assigns(:filled_form).should eq(@filled_form)
+        assigns(:form_template).ror_contents.should eq(FactoryGirl.create(:form_template).ror_contents)
+        prefilled_ror_contents = <<-EOF
         <p><input name="filled_form[input0]" type="text" id="filled_form_input0" value="MyValue"></p>
-      EOF
-      assigns(:prefilled_ror_contents).strip.should eq(prefilled_ror_contents.strip)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new filled_form as @filled_form" do
-      pending "this part of CRUD is not needed yet"
-      get :new
-      assigns(:filled_form).should be_a_new(FilledForm)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested filled_form as @filled_form" do
-      get :edit, :id => @filled_form.id.to_s
-      assigns(:filled_form).should eq(@filled_form)
-    end
-  end
-
-  describe "POST create" do
-    before(:each) do
-      @form_template = FactoryGirl.create(:form_template)
-    end
-
-    describe "with valid params" do
-      it "creates a new FilledForm" do
-        expect {
-          post :create, :form_template_id => @form_template.id, :filled_form => valid_attributes
-        }.to change(FilledForm, :count).by(1)
-      end
-
-      it "assigns a newly created filled_form as @filled_form" do
-        post :create, :form_template_id => @form_template.id, :filled_form => valid_attributes
-        assigns(:filled_form).should be_a(FilledForm)
-        assigns(:filled_form).should be_persisted
-      end
-
-      it "redirects to the created filled_form" do
-        pending "not sure where it should redirect yet"
-        post :create, :form_template_id => @form_template.id, :filled_form => valid_attributes
-        response.should redirect_to(FilledForm.last)
+        EOF
+        assigns(:prefilled_ror_contents).strip.should eq(prefilled_ror_contents.strip)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved filled_form as @filled_form" do
-        pending "currently there are no restrictions as to acceptable params"
-        # Trigger the behavior that occurs when invalid params are submitted
-        FilledForm.any_instance.stub(:save).and_return(false)
-        post :create, :form_template_id => @form_template.id, :filled_form => {}
+    describe "GET new" do
+      it "assigns a new filled_form as @filled_form" do
+        pending "this part of CRUD is not needed yet"
+        get :new
         assigns(:filled_form).should be_a_new(FilledForm)
       end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        FilledForm.any_instance.stub(:save).and_return(false)
-        post :create, :form_template_id => @form_template.id, :filled_form => {}
-        response.should render_template("new")
-      end
     end
-  end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested filled_form" do
-        # Assuming there are no other filled_forms in the database, this
-        # specifies that the FilledForm created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        FilledForm.any_instance.should_receive(:update_attributes).with(valid_attributes)
-        put :update, :id => @filled_form.id,
-            :filled_form => valid_attributes
-      end
-
+    describe "GET edit" do
       it "assigns the requested filled_form as @filled_form" do
-        put :update, :id => @filled_form.id, :filled_form => valid_attributes
+        get :edit, :id => @filled_form.id.to_s
         assigns(:filled_form).should eq(@filled_form)
-      end
-
-      it "redirects to the filled_form" do
-        put :update, :id => @filled_form.id, :filled_form => valid_attributes
-        response.should redirect_to(form_template_filled_form_path(@filled_form.form_template_id, @filled_form))
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the filled_form as @filled_form" do
-        pending "currently there are no restrictions as to acceptable params"
-        # Trigger the behavior that occurs when invalid params are submitted
-        FilledForm.any_instance.stub(:save).and_return(false)
-        put :update, :id => @filled_form.id.to_s, :filled_form => {}
-        assigns(:filled_form).should eq(@filled_form)
+    describe "POST create" do
+      before(:each) do
+        @form_template = FactoryGirl.create(:form_template)
       end
 
-      it "re-renders the 'edit' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        FilledForm.any_instance.stub(:save).and_return(false)
-        put :update, :id => @filled_form.id.to_s, :filled_form => {}
-        response.should render_template("edit")
+      describe "with valid params" do
+        it "creates a new FilledForm" do
+          expect {
+            post :create, :form_template_id => @form_template.id, :filled_form => valid_attributes
+          }.to change(FilledForm, :count).by(1)
+        end
+
+        it "assigns a newly created filled_form as @filled_form" do
+          post :create, :form_template_id => @form_template.id, :filled_form => valid_attributes
+          assigns(:filled_form).should be_a(FilledForm)
+          assigns(:filled_form).should be_persisted
+        end
+
+        it "redirects to the created filled_form" do
+          pending "not sure where it should redirect yet"
+          post :create, :form_template_id => @form_template.id, :filled_form => valid_attributes
+          response.should redirect_to(FilledForm.last)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved filled_form as @filled_form" do
+          pending "currently there are no restrictions as to acceptable params"
+          # Trigger the behavior that occurs when invalid params are submitted
+          FilledForm.any_instance.stub(:save).and_return(false)
+          post :create, :form_template_id => @form_template.id, :filled_form => {}
+          assigns(:filled_form).should be_a_new(FilledForm)
+        end
+
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          FilledForm.any_instance.stub(:save).and_return(false)
+          post :create, :form_template_id => @form_template.id, :filled_form => {}
+          response.should render_template("new")
+        end
       end
     end
-  end
 
-  describe "DELETE destroy" do
-    it "destroys the requested filled_form" do
-      expect {
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested filled_form" do
+          # Assuming there are no other filled_forms in the database, this
+          # specifies that the FilledForm created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          FilledForm.any_instance.should_receive(:update_attributes).with(valid_attributes)
+          put :update, :id => @filled_form.id,
+              :filled_form => valid_attributes
+        end
+
+        it "assigns the requested filled_form as @filled_form" do
+          put :update, :id => @filled_form.id, :filled_form => valid_attributes
+          assigns(:filled_form).should eq(@filled_form)
+        end
+
+        it "redirects to the filled_form" do
+          put :update, :id => @filled_form.id, :filled_form => valid_attributes
+          response.should redirect_to(form_template_filled_form_path(@filled_form.form_template_id, @filled_form))
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the filled_form as @filled_form" do
+          pending "currently there are no restrictions as to acceptable params"
+          # Trigger the behavior that occurs when invalid params are submitted
+          FilledForm.any_instance.stub(:save).and_return(false)
+          put :update, :id => @filled_form.id.to_s, :filled_form => {}
+          assigns(:filled_form).should eq(@filled_form)
+        end
+
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          FilledForm.any_instance.stub(:save).and_return(false)
+          put :update, :id => @filled_form.id.to_s, :filled_form => {}
+          response.should render_template("edit")
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "destroys the requested filled_form" do
+        expect {
+          delete :destroy, :id => @filled_form.id.to_s
+        }.to change(FilledForm, :count).by(-1)
+      end
+
+      it "redirects to the filled_forms list" do
+        pending "not sure where it should redirect yet"
         delete :destroy, :id => @filled_form.id.to_s
-      }.to change(FilledForm, :count).by(-1)
-    end
-
-    it "redirects to the filled_forms list" do
-      pending "not sure where it should redirect yet"
-      delete :destroy, :id => @filled_form.id.to_s
-      response.should redirect_to(filled_forms_url)
+        response.should redirect_to(filled_forms_url)
+      end
     end
   end
 

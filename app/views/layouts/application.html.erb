@@ -8,20 +8,27 @@
 </head>
 <body id="user_interface">
 
-    <div id="columns">
-      <div id="side">
-        <a href="http://www....">Home</a><br/>
-        <a href="http://www..../contact">Contact</a><br/>
-        <a href="http://www..../contact">Admin Area</a><br/>
-        <br/><br/>
-        <div id="user_filled_forms">
-          <%= render :partial => "shared/user_filled_forms" %>
-        </div>
-      </div>
-      <div id="main">
-        <%= yield %>
-      </div>
+<div id="columns">
+  <div id="side">
+    <div id="authentication">
+      <%= render :partial => 'shared/authentication' %>
     </div>
+    <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+    <%- end -%>
+    <a href="http://www....">Home</a><br/>
+    <a href="http://www..../contact">Contact</a><br/>
+    <a href="http://www..../contact">Admin Area</a><br/>
+    <br/><br/>
+
+    <div id="user_filled_forms">
+      <%= render :partial => "shared/user_filled_forms" %>
+    </div>
+  </div>
+  <div id="main">
+    <%= yield %>
+  </div>
+</div>
 
 </body>
 </html>

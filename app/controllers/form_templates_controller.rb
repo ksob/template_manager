@@ -1,4 +1,5 @@
 class FormTemplatesController < ApplicationController
+  before_filter :authenticate_user!
   include FormProcessing
 
   # GET /form_templates
