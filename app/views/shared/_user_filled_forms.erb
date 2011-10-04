@@ -1,4 +1,4 @@
-<% if user_signed_in? and self.user_filled_forms %>
+<% if user_signed_in? and self.does_user_filled_in_any_form? %>
 <div class="user_filled_forms_title">Your Filled Forms</div>
 <%= render_navigation :items => self.menu %>
 <% end %>

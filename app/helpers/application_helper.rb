@@ -26,7 +26,10 @@ module ApplicationHelper
   # Return the user_filled_forms on a per-user basis.
   # TODO: add memoization of this method because it is being called twice in the view
   def user_filled_forms
-    FormTemplate.get_user_filled_forms
+    FormTemplate.get_user_filled_forms(current_user)
   end
 
+  def does_user_filled_in_any_form?
+    user_filled_forms and user_filled_forms != []
+  end
 end

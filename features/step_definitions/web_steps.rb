@@ -24,11 +24,25 @@ require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 
-module WithinHelpers
-  def with_scope(locator)
-    locator ? within(*selector_for(locator)) { yield } : yield
+class String
+  def csserize
+    self.downcase.gsub(" ","-")
   end
 end
+
+module WithinHelpers
+  def with_scope(locator,css_type=nil)
+    locator = convert_locator_to_css(locator,css_type) if locator and css_type
+    locator ? within(locator) { yield } : yield
+  end
+
+  def convert_locator_to_css(locator,css_type)
+    locator = locator.csserize
+    return locator if locator =~ /^[.#]/
+    css_type==:css_class ? ".#{locator}" : "##{locator}"
+  end
+end
+
 World(WithinHelpers)
 
 # Single-line step scoper
@@ -100,14 +114,6 @@ end
 
 When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
   attach_file(field, File.expand_path(path))
-end
-
-Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|

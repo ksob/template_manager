@@ -1,9 +1,8 @@
 Given /^I am registered$/ do
-  @registered_user = RailsAdmin::AbstractModel.new("User").create(
+  @registered_user = @current_user = RailsAdmin::AbstractModel.new("User").create(
       :email => "user@test.com",
       :password => "my_password"
-    )
-  #@registered_user = Factory(:user, :email => "john@doe.com", :password => "password")
+  )
 end
 
 Given /^I am admin$/ do

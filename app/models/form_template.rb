@@ -4,7 +4,7 @@ class FormTemplate < ActiveRecord::Base
     FilledForm.all({:conditions => {:form_template_id => self.id}}.merge(options))
   end
 
-  def self.get_user_filled_forms
+  def self.get_user_filled_forms(user)
     # the map function in javascript
     map = <<-EOF
       function() {
@@ -26,7 +26,8 @@ class FormTemplate < ActiveRecord::Base
     opts = {}
     hash = opts.merge({
                           :out => {:inline => true},
-                          :raw => true
+                          :raw => true,
+                          :query => {:user_id => user.id.to_i}
                       })
 
     collection = FilledForm.collection.mapreduce(map, reduce, hash)

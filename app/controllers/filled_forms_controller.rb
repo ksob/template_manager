@@ -50,7 +50,7 @@ class FilledFormsController < ApplicationController
   # POST /filled_forms.json
   def create
     @form_template = FormTemplate.find(params[:form_template_id])
-    @filled_form = @form_template.filled_forms.create(params[:filled_form])
+    @filled_form = @form_template.filled_forms.create(params[:filled_form].merge(:user_id => current_user.id.to_i))
 
     respond_to do |format|
       if @filled_form.save
