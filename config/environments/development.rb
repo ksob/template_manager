@@ -24,4 +24,5 @@ TemplateManager::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
+  config.assets.paths << File.join(Rails.root,'vendor/assets/stylesheets/ui-lightness')
 end

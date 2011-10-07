@@ -1,4 +1,5 @@
 class FormTemplate < ActiveRecord::Base
+  validates :name,  :presence => true
 
   def filled_forms(options={})
     FilledForm.all({:conditions => {:form_template_id => self.id}}.merge(options))

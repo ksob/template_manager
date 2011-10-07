@@ -16,8 +16,8 @@ Feature: lists available form templates
       | Name        |
       | TemplateXYZ |
     When I am on the home page
-    Then I should see "Your Filled Forms" on the "Left side"
-    And I should see "TemplateXYZ" on the "Left side"
+    Then I should see "Your Filled Forms" on the "Right side"
+    And I should see "TemplateXYZ" on the "Right side"
 
   Scenario: User filled two forms before
     Given I am logged in as standard user
@@ -26,5 +26,5 @@ Feature: lists available form templates
       | TemplateXYZ   |
       | Template ABCD |
     When I am on the home page
-    Then I should see "Your Filled Forms" on the "Left side"
-    And I should see "Template ABCD" on the "Left side"
+    Then I should see "Your Filled Forms" on the "Right side"
+    And I should see "Template ABCD" on the "Right side"

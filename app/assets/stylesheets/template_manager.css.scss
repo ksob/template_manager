@@ -1,38 +1,65 @@
-#columns {
-  }
+.devise_form div {
+  margin: 0.5em 0 0;
+}
 
-#left-side {
-  float: left;
-  padding-top: 1em;
-  padding-left: 1em;
-  padding-bottom: 1em;
-  width: 21em;
-  background: #169;
-  a {
-    color: #bfb;
-    font-size: small; }}
+.ui-button {
+	margin: 0.5em 0 0;
+}
+
+header #authentication {
+	position: absolute;
+    top: 0px;
+    right: 0.5em;
+}
+
+header #general-navigation {
+    position: absolute;
+    top: 0px;
+    left: 0.5em;
+}
+
+header nav ul {
+	list-style: none;
+	margin: 0 0 3em;
+	padding: 0;
+}
+
+header nav ul li {
+	display: inline;
+}
+
+nav {
+	width: 100%;
+}
+
+#right-side {
+	float: right;
+	padding-top: 1em;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	a {
+		font-size: small; }}
 
 /* START:user_filled_forms_side */
 /* Styles for the user_filled_forms in the sidebar */
 #user_filled_forms {
-  float: left;
-  .user_filled_forms_title {
-    font-size: 180%;
-    font-family: sans-serif; }}
+	float: right;
+	padding-top: 2ex;
+	table {
+		border-top:    1px dotted #595;
+		border-bottom: 1px dotted #595;
+		margin-bottom: 10px; } 
+		.title {
+			float: right;
+			margin-bottom: 10px; }}
 
 #user_filled_forms, #user_filled_forms table {
-  font-size: smaller;
-  color:     white; }
-
-#user_filled_forms {
-  table {
-    border-top:    1px dotted #595;
-    border-bottom: 1px dotted #595;
-    margin-bottom: 10px; } }
+	font-size: smaller;}
 /* END:user_filled_forms_side */
 
 #main {
-  margin-left: 17em;
-  padding-top: 4ex;
-  padding-left: 6em;
-  background: white; }
+	float: left;
+	margin-left: 1em;
+	padding-top: 3ex;
+	padding-left: 1em;
+	background: white; }
