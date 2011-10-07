@@ -33,13 +33,6 @@ describe FilledFormsController do
   end
 
   context "logged-in user" do
-    before do
-      user = RailsAdmin::AbstractModel.new("User").create(
-          :email => "username@example.com",
-          :password => "password"
-      )
-      login_as user
-    end
 
     describe "GET index" do
       it "assigns all filled_forms as @filled_forms" do
