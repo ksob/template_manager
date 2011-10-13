@@ -215,3 +215,25 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+When /^I (press|follow|check|uncheck|choose) "([^\"]*)" for (.*) whose (.*) is "([^\"]*)"$/ do |action, whatyouclick, class_name, var_name, value|
+  unless var_name == "id" then
+    id = eval("\"#{class_name}\".classify.constantize.find_by_#{var_name}(\"#{value}\").id.to_s")
+  else
+    id = value
+  end
+  within("table > tr:nth-child(#{id.to_i+1})") do
+    case action
+      when "press"
+        click_button(whatyouclick)
+      when "follow"
+        click_link(whatyouclick)
+      when "check"
+        check(whatyouclick)
+      when "uncheck"
+        uncheck(whatyouclick)
+      when "choose"
+        uncheck(whatyouclick)
+    end
+  end
+end

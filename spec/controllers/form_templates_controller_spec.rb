@@ -40,6 +40,7 @@ describe FormTemplatesController do
         assigns(:form_templates).should eq([form_template])
       end
     end
+
     describe "GET show" do
       it "assigns the requested form_template as @form_template" do
         form_template = FactoryGirl.create(:form_template)

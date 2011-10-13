@@ -54,7 +54,7 @@ class FilledFormsController < ApplicationController
 
     respond_to do |format|
       if @filled_form.save
-        format.html { redirect_to :back, notice: 'Filled form was successfully created.' }
+        format.html { redirect_to form_templates_path, notice: 'Filled form was successfully created.' }
         format.js { @current_form_template = @form_template; @current_filled_form = @filled_form }
         format.json { render json: @filled_form, status: :created, location: @filled_form }
       else

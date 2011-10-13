@@ -12,7 +12,7 @@
   <%= form_for([@form_template, @filled_form], :remote => true) do |f| %>
     <%= raw(@form_template.ror_contents) %>
   	<div class="actions">
-      <%= f.submit %>
+      <%= f.submit "Submit" %>
   	</div>
   <% end %>
 

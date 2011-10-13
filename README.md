@@ -34,7 +34,11 @@ Developed and tested using the following setup:
 Running test suite
 ==================
 
-    bundle install --without development production
+So the standard procedure would now look like this:
+
+    bundle install --without production
+	RAILS_ENV=test rake db:create
+	RAILS_ENV=test rake db:migrate
 	bundle exec cucumber
 	bundle exec rake spec
 		
@@ -45,8 +49,8 @@ Make sure your MongoDB installation and configuration matches that of config/mon
 and then run all the standard commands:
 	
 	bundle install --without test production
-	rake db:create
-	rake db:migrate
+	RAILS_ENV=development rake db:create
+	RAILS_ENV=development rake db:migrate
 	rails s
 	
 Running app in production environment
@@ -54,13 +58,33 @@ Running app in production environment
 
 Make sure your MongoDB and PostgreSQL (or any other relational db) installation and configuration matches that of config/mongoid.yml and config/database.yml,
 and then run all the standard commands:
-	
+
 	bundle install --without development test cucumber
+	
+From now on each successive command must have access to MongoDB specific variables that are specified in config/mongoid.yml: 	
+
+	production:
+	  host: <%= ENV['MONGOID_HOST'] %>
+	  port: <%= ENV['MONGOID_PORT'] %>
+	  username: <%= ENV['MONGOID_USERNAME'] %>
+	  password: <%= ENV['MONGOID_PASSWORD'] %>
+	  database: <%= ENV['MONGOID_DATABASE'] %>
+
+Then run:
+
 	RAILS_ENV=production rake assets:precompile
 	RAILS_ENV=production rake db:create
 	RAILS_ENV=production rake db:migrate
 	RAILS_ENV=production rails s
 
+Notes
+=====
+	
+As of 07 October 2011 I experience some troubles getting environment reporting to work when running rake.
+It maybe caused by my non traditional hybrid db setup or rails/rake itself. 
+Due to that if you should run all rake commands explicitly specifying environment via RAILS_ENV
+Follow up: https://github.com/RailsApps/rails3-mongoid-devise/issues/9
+	
 License
 =======
 
