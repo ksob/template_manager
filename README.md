@@ -1,7 +1,9 @@
 template-manager
 ================
 
-A Rails 3.1 application (not engine) using hybrid of MongoDB and transactional one. Uses MongoID gem for dynamic MongoDB access and ActiveRecord for transactional world.
+A Rails 3.1 application allowing for user-driven form creation / generation, where the user can design, create and fill its own HTML forms all on the runtime. 
+
+It is a Rails 3.1 application - not engine. It is using a hybrid of MongoDB and transactional db. MongoID for dynamic MongoDB access and ActiveRecord for the transactional side.
 
 It uses all the standard gems introduced in Rails 3.1 including (SASS, JQuery, CoffeeScript).
 In addition it incorporates the following:
@@ -31,33 +33,50 @@ Developed and tested using the following setup:
 	$ rails -v
 	Rails 3.1.0
 	
-Running test suite
-==================
+Installation
+============
 
-So the standard procedure would now look like this:
-
-    bundle install --without production
-	RAILS_ENV=test rake db:create
-	RAILS_ENV=test rake db:migrate
-	bundle exec cucumber
-	bundle exec rake spec
+git clone git://github.com/ksob/template_manager.git
+cd ./template_manager
+bundle install
 		
-Running app in development environment
+Running app (in development environment)
 ======================================
 
-Make sure your MongoDB installation and configuration matches that of config/mongoid.yml,
-and then run all the standard commands:
+Make sure your MongoDB installation and configuration matches that of config/mongoid.yml and that it is running.
+Then run all the standard stuff:
 	
 	bundle install --without test production
 	RAILS_ENV=development rake db:create
 	RAILS_ENV=development rake db:migrate
 	rails s
 	
+The project is configured to use Guard that is automatically running Cucumber and RSpec tests when it detects any change to code under test so you would also like to issue this command in a separate terminal when developing:
+ 	
+	guard
+	
+Usage
+=====
+
+Create first user using Sign Up button, go to Admin Area and create a few Form Templates, then go back to http://localhost:3000/ and you should be able to fill the templates. After you have filled up a few of them then you should be able to perform all the CRUD on the Filled Forms.
+	
+Running test suite
+==================
+
+Make sure your MongoDB installation and configuration matches that of config/mongoid.yml and that it is running.
+Then run all the standard stuff:
+
+    bundle install --without production
+	RAILS_ENV=test rake db:create
+	RAILS_ENV=test rake db:migrate
+	bundle exec cucumber
+	RAILS_ENV=test bundle exec rake spec
+		
 Running app in production environment
 =====================================
 
-Make sure your MongoDB and PostgreSQL (or any other relational db) installation and configuration matches that of config/mongoid.yml and config/database.yml,
-and then run all the standard commands:
+Make sure your MongoDB and PostgreSQL (or any other relational db) installation and configuration matches that of config/mongoid.yml and config/database.yml.
+Then run:
 
 	bundle install --without development test cucumber
 	
@@ -70,7 +89,7 @@ From now on each successive command must have access to MongoDB specific variabl
 	  password: <%= ENV['MONGOID_PASSWORD'] %>
 	  database: <%= ENV['MONGOID_DATABASE'] %>
 
-Then run:
+Then run all the standard stuff:
 
 	RAILS_ENV=production rake assets:precompile
 	RAILS_ENV=production rake db:create
@@ -80,9 +99,9 @@ Then run:
 Notes
 =====
 	
-As of 07 October 2011 I experience some troubles getting environment reporting to work when running rake.
-It maybe caused by my non traditional hybrid db setup or rails/rake itself. 
-Due to that if you should run all rake commands explicitly specifying environment via RAILS_ENV
+As of 14 October 2011 I am experiencing some troubles getting environment reporting to work properly when running rake.
+It maybe caused by my non traditional hybrid db setup or bug rails/rake itself. 
+Due to that you should run all rake commands explicitly specifying environment via RAILS_ENV. 
 Follow up: https://github.com/RailsApps/rails3-mongoid-devise/issues/9
 	
 License
