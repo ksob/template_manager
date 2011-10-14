@@ -36,9 +36,9 @@ Developed and tested using the following setup:
 Installation
 ============
 
-git clone git://github.com/ksob/template_manager.git
-cd ./template_manager
-bundle install
+	git clone git://github.com/ksob/template_manager.git
+	cd ./template_manager
+	bundle install
 		
 Running app (in development environment)
 ======================================
